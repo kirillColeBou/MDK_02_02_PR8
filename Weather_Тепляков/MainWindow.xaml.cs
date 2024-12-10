@@ -20,19 +20,31 @@ namespace Weather_Тепляков
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string PlaceholderText = "Здесь можно указать ваш город";
+
         public MainWindow()
         {
             InitializeComponent();
+            parent.Children.Add(new Elements.Elements());
+            parent.Children.Add(new Elements.Elements());
         }
 
         private void textBox_LostFocus(object sender, RoutedEventArgs e)
         {
-
+            if (string.IsNullOrWhiteSpace(city.Text))
+            {
+                city.Text = PlaceholderText;
+                city.Foreground = Brushes.Gray;
+            }
         }
 
         private void textBox_GotFocus(object sender, RoutedEventArgs e)
         {
-
+            if (city.Text == PlaceholderText)
+            {
+                city.Text = string.Empty;
+                city.Foreground = Brushes.Black;
+            }
         }
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)

@@ -7,9 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Elements\" />
+    <None Remove="Images\cloud.png" />
+    <None Remove="Images\rain.png" />
+    <None Remove="Images\snow.png" />
+    <None Remove="Images\sun.png" />
+    <None Remove="Images\sun_or_cloud.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Classes\" />
-    <Folder Include="Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\cloud.png" />
+    <Resource Include="Images\rain.png" />
+    <Resource Include="Images\snow.png" />
+    <Resource Include="Images\sun.png" />
+    <Resource Include="Images\sun_or_cloud.png" />
   </ItemGroup>
 
 </Project>

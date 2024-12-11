@@ -70,5 +70,15 @@ namespace Weather_Тепляков
                 }
             }
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
     }
 }

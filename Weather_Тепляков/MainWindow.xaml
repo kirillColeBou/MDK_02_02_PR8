@@ -5,30 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Weather_Тепляков"
         mc:Ignorable="d"
-        Title="Погода" Height="450" Width="800" MinHeight="450" MinWidth="800">
-    <Grid Background="#87CEEB">
-        <TextBox x:Name="city" Width="270" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Foreground="gray" Background="#F0F0F0" BorderBrush="#FFD700" 
-                 BorderThickness="2" VerticalContentAlignment="Center" Padding="7.5" Text="Здесь можно указать ваш город" LostFocus="textBox_LostFocus" GotFocus="textBox_GotFocus" KeyDown="textBox_KeyDown">
-            <TextBox.Resources>
-                <Style TargetType="TextBox">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TextBox">
-                                <Border
-                                    CornerRadius="10"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}">
-                                    <ScrollViewer x:Name="PART_ContentHost" />
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        <ScrollViewer Margin="10,62,10,10" VerticalScrollBarVisibility="Auto">
-            <StackPanel x:Name="parent"/>
-        </ScrollViewer>
+        Title="Погода" Height="450" Width="800" MinHeight="450" MinWidth="800"
+        Background="#333333" WindowStyle="None" AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#F0F0F0"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid Background="#444444" Height="40" VerticalAlignment="Top" MouseDown="Grid_MouseDown">
+            <TextBlock Text="Погода" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       FontSize="18" FontWeight="Bold" Foreground="#F0F0F0"/>
+            <Button Content="X" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                    Width="30" Height="30" Margin="0,0,10,0" Background="Transparent" 
+                    BorderBrush="Transparent" Foreground="#F0F0F0" Click="CloseButton_Click"/>
+        </Grid>
+        <Grid Background="#555555" Margin="0,40,0,0">
+            <TextBox x:Name="city" Width="270" Margin="10" VerticalAlignment="Top" HorizontalAlignment="Center" 
+                     HorizontalContentAlignment="Center" FontSize="16" Foreground="Gray" Background="#F0F0F0" 
+                     BorderBrush="#555555" BorderThickness="2" VerticalContentAlignment="Center" Padding="7.5" 
+                     Text="Здесь можно указать ваш город" LostFocus="textBox_LostFocus" GotFocus="textBox_GotFocus" 
+                     KeyDown="textBox_KeyDown">
+                <TextBox.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border CornerRadius="10" Background="{TemplateBinding Background}" 
+                                            BorderBrush="{TemplateBinding BorderBrush}" 
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ScrollViewer x:Name="PART_ContentHost" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <ScrollViewer Margin="10,62,10,10" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="parent"/>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

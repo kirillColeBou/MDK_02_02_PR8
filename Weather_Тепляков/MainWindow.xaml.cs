@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Weather_Тепляков.Classes;
 
 namespace Weather_Тепляков
 {
@@ -21,12 +22,15 @@ namespace Weather_Тепляков
     public partial class MainWindow : Window
     {
         private const string PlaceholderText = "Здесь можно указать ваш город";
+        private readonly Weather _weather;
+
 
         public MainWindow()
         {
             InitializeComponent();
             parent.Children.Add(new Elements.Elements());
             parent.Children.Add(new Elements.Elements());
+            _weather = new Weather();
         }
 
         private void textBox_LostFocus(object sender, RoutedEventArgs e)
@@ -51,7 +55,22 @@ namespace Weather_Тепляков
         {
             if(e.Key == Key.Enter)
             {
+                var City = city.Text;
+                if (string.IsNullOrWhiteSpace(City))
+                {
+                    MessageBox.Show("Введите название города");
+                    return;
+                }
 
+                try
+                {
+                    var weatherData = _weather.GetWeatherAsync(City);
+                    
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка: {ex.Message}");
+                }
             }
         }
     }

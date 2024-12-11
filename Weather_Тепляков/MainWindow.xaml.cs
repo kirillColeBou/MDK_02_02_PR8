@@ -1,36 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Weather_Тепляков.Classes;
+using Weather_Тепляков.Elements;
 
 namespace Weather_Тепляков
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private const string PlaceholderText = "Здесь можно указать ваш город";
-        private readonly Weather _weather;
-
+        private readonly WeatherViewModel _viewModel;
 
         public MainWindow()
         {
             InitializeComponent();
-            parent.Children.Add(new Elements.Elements());
-            parent.Children.Add(new Elements.Elements());
-            _weather = new Weather();
+            _viewModel = new WeatherViewModel();
+            DataContext = _viewModel; // Устанавливаем DataContext
         }
 
         private void textBox_LostFocus(object sender, RoutedEventArgs e)
@@ -51,12 +38,12 @@ namespace Weather_Тепляков
             }
         }
 
-        private void textBox_KeyDown(object sender, KeyEventArgs e)
+        private async void textBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
-                var City = city.Text;
-                if (string.IsNullOrWhiteSpace(City))
+                var cityName = city.Text;
+                if (string.IsNullOrWhiteSpace(cityName))
                 {
                     MessageBox.Show("Введите название города");
                     return;
@@ -64,8 +51,21 @@ namespace Weather_Тепляков
 
                 try
                 {
-                    var weatherData = _weather.GetWeatherAsync(City);
-                    
+                    // Загрузка данных о погоде через ViewModel
+                    await _viewModel.LoadWeatherAsync(cityName);
+
+                    // Очистка контейнера перед добавлением новых элементов
+                    parent.Children.Clear();
+
+                    // Создание и добавление элементов Elements
+                    for (int i = 0; i < 40; i++) // Пример: добавляем 2 элемента
+                    {
+                        var element = new Elements.Elements
+                        {
+                            DataContext = _viewModel // Передача ViewModel в элемент
+                        };
+                        parent.Children.Add(element);
+                    }
                 }
                 catch (Exception ex)
                 {

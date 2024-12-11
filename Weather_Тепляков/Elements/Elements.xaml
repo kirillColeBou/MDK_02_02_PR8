@@ -2,9 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Weather_Тепляков.Elements"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance local:WeatherViewModel}">
+    <UserControl.DataContext>
+        <local:WeatherViewModel/>
+    </UserControl.DataContext>
     <Border Background="#F0F0F0" BorderBrush="#CCCCCC" BorderThickness="2" CornerRadius="15" Padding="15" Margin="10">
         <Grid>
             <Grid.RowDefinitions>
@@ -20,10 +24,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,15,15">
-                <TextBlock Text="25" FontSize="48" FontWeight="Bold" Foreground="#333333" VerticalAlignment="Center"/>
-                <TextBlock Text="Октября" FontSize="16" Foreground="#555555" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
+                <TextBlock Text="{Binding WeatherData.Main.Temperature, StringFormat='{}{0}°C'}" FontSize="48" FontWeight="Bold" Foreground="#333333" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding WeatherData.DateTime, StringFormat='{}{0:dd MMMM}'}" FontSize="16" Foreground="#555555" VerticalAlignment="Bottom" Margin="0,0,0,5"/>
             </StackPanel>
-            <TextBlock Text="Утро:" Grid.Row="1" Grid.Column="1" FontWeight="Bold" Foreground="#333333" VerticalAlignment="Center" Margin="5"/>
+            <TextBlock Text="Погода: " Grid.Row="1" Grid.Column="1" FontWeight="Bold" Foreground="#333333" VerticalAlignment="Center" Margin="5"/>
             <Grid Grid.Row="1" Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -32,56 +36,49 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Image Source="/Images/sun_or_cloud.png" Width="32" Height="32" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="+12°~+23°" Foreground="#555555" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="Облачно с прояснениями" Foreground="#555555" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="752 мм рт. ст." Foreground="#555555" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="50%" Foreground="#555555" Grid.Column="4" VerticalAlignment="Center"/>
-            </Grid>
-            <TextBlock Text="День:" Grid.Row="2" Grid.Column="1" FontWeight="Bold" Foreground="#333333" VerticalAlignment="Center" Margin="5"/>
-            <Grid Grid.Row="2" Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Source="/Images/sun_or_cloud.png" Width="32" Height="32" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="+25°~+26°" Foreground="#555555" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="Облачно с прояснениями" Foreground="#555555" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="753 мм рт. ст." Foreground="#555555" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="33%" Foreground="#555555" Grid.Column="4" VerticalAlignment="Center"/>
-            </Grid>
-            <TextBlock Text="Вечер:" Grid.Row="3" Grid.Column="1" FontWeight="Bold" Foreground="#333333" VerticalAlignment="Center" Margin="5"/>
-            <Grid Grid.Row="3" Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Source="/Images/sun_or_cloud.png" Width="32" Height="32" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="+19°~+26°" Foreground="#555555" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="Облачно с прояснениями" Foreground="#555555" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="754 мм рт. ст." Foreground="#555555" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="52%" Foreground="#555555" Grid.Column="4" VerticalAlignment="Center"/>
-            </Grid>
-            <TextBlock Text="Ночь:" Grid.Row="4" Grid.Column="1" FontWeight="Bold" Foreground="#333333" VerticalAlignment="Center" Margin="5"/>
-            <Grid Grid.Row="4" Grid.Column="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Source="/Images/cloud.png" Width="32" Height="32" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="+10°~+17°" Foreground="#555555" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="Пасмурно" Foreground="#555555" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="754 мм рт. ст." Foreground="#555555" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock Text="84%" Foreground="#555555" Grid.Column="4" VerticalAlignment="Center"/>
+                <Image Width="32" Height="32" VerticalAlignment="Center" Margin="0,0,10,0">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="/Images/sun.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="ясно">
+                                    <Setter Property="Source" Value="/Images/sun.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="малооблачно">
+                                    <Setter Property="Source" Value="/Images/sun_or_cloud.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="облачно с прояснениями">
+                                    <Setter Property="Source" Value="/Images/sun_or_cloud.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="пасмурно">
+                                    <Setter Property="Source" Value="/Images/cloud.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="дождь">
+                                    <Setter Property="Source" Value="/Images/rain.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="ливень">
+                                    <Setter Property="Source" Value="/Images/rain.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="гроза">
+                                    <Setter Property="Source" Value="/Images/rain.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="снег">
+                                    <Setter Property="Source" Value="/Images/snow.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="небольшой снег">
+                                    <Setter Property="Source" Value="/Images/snow.png"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding WeatherData.WeatherDescription}" Value="туман">
+                                    <Setter Property="Source" Value="/Images/cloud.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+                <TextBlock Text="{Binding WeatherData.Main.Temperature, StringFormat='{}{0}°C'}" Foreground="#555555" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding WeatherData.WeatherDescription}" Foreground="#555555" Grid.Column="2" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding WeatherData.Main.Pressure, StringFormat='{}{0} мм рт. ст.'}" Foreground="#555555" Grid.Column="3" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding WeatherData.Main.Humidity, StringFormat='{}{0}%'}" Foreground="#555555" Grid.Column="4" VerticalAlignment="Center"/>
             </Grid>
         </Grid>
     </Border>

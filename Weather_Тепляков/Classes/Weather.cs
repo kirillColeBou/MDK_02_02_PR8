@@ -22,7 +22,7 @@ namespace Weather_Тепляков.Classes
 
         public async Task<WeatherData> GetWeatherAsync(string city)
         {
-            var url = $"{BaseUrl}?q={city}&appid={ApiKey}&units=metric";
+            var url = $"{BaseUrl}?q={city}&appid={ApiKey}&units=metric&lang=ru";
             var response = await _httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
@@ -44,8 +44,22 @@ namespace Weather_Тепляков.Classes
         [JsonProperty("dt")]
         public long DateTimeUnix { get; set; }
 
+        [JsonProperty("weather")]
+        public WeatherDescription[] Weather { get; set; }
+
         public DateTime DateTime => DateTimeOffset.FromUnixTimeSeconds(DateTimeUnix).DateTime;
+        public string WeatherDescription => Weather?.Length > 0 ? Weather[0].Description : "Неизвестно";
     }
+
+    public class WeatherDescription
+    {
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
+        [JsonProperty("icon")]
+        public string Icon { get; set; }
+    }
+
 
     public class MainData
     {

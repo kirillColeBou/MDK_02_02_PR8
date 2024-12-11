@@ -17,7 +17,7 @@ namespace Weather_Тепляков
         {
             InitializeComponent();
             _viewModel = new WeatherViewModel();
-            DataContext = _viewModel; // Устанавливаем DataContext
+            DataContext = _viewModel;
         }
 
         private void textBox_LostFocus(object sender, RoutedEventArgs e)
@@ -48,23 +48,20 @@ namespace Weather_Тепляков
                     MessageBox.Show("Введите название города");
                     return;
                 }
-
                 try
                 {
-                    // Загрузка данных о погоде через ViewModel
                     await _viewModel.LoadWeatherAsync(cityName);
-
-                    // Очистка контейнера перед добавлением новых элементов
                     parent.Children.Clear();
-
-                    // Создание и добавление элементов Elements
-                    for (int i = 0; i < 40; i++) // Пример: добавляем 2 элемента
+                    if (_viewModel.ForecastData?.List != null)
                     {
-                        var element = new Elements.Elements
+                        foreach (var forecastItem in _viewModel.ForecastData.List)
                         {
-                            DataContext = _viewModel // Передача ViewModel в элемент
-                        };
-                        parent.Children.Add(element);
+                            var element = new Elements.Elements
+                            {
+                                DataContext = forecastItem
+                            };
+                            parent.Children.Add(element);
+                        }
                     }
                 }
                 catch (Exception ex)

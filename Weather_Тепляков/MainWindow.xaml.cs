@@ -63,6 +63,7 @@ namespace Weather_Тепляков
                             parent.Children.Add(element);
                         }
                     }
+                    requestCountLabel.Content = $"Осталось запросов: {_viewModel.MaxRequestsPerDay - _viewModel._requestCount}";
                 }
                 catch (Exception ex)
                 {

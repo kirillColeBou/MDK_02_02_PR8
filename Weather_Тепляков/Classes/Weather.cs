@@ -9,7 +9,6 @@ namespace Weather_Тепляков.Classes
     {
         private const string ApiKey = "84d08dfffe2e4b631d17c38cfc1e730e";
         private const string BaseUrl = "https://api.openweathermap.org/data/2.5/forecast";
-
         private readonly HttpClient _httpClient;
 
         public Weather()

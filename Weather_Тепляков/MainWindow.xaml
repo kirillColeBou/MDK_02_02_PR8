@@ -43,6 +43,9 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
+            <Label x:Name="requestCountLabel" Content="Осталось запросов: 50" 
+       HorizontalAlignment="Center" VerticalAlignment="Top" 
+       Margin="0,40,0,0" FontSize="14" Foreground="#F0F0F0"/>
             <ScrollViewer Margin="10,62,10,10" VerticalScrollBarVisibility="Auto">
                 <StackPanel x:Name="parent"/>
             </ScrollViewer>
